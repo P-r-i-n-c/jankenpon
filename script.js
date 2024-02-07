@@ -1,62 +1,48 @@
 function getComputerChoice() {
-  const choices = ["rock", "paper", "scissors"];
-  const randomIndex = Math.floor(Math.random() * 3);
-  return choices[randomIndex];
+  const randomChoice = Math.floor(Math.random() * 3);
+  const values = ["rock", "paper", "scissors"];
+
+  return values[randomChoice];
 }
 
-function getPlayerChoice() {
-  let playerMove = prompt(
-    "Enter your move: Rock, Paper, or Scissors"
-  ).toLowerCase();
-
-  while (
-    playerMove !== "rock" &&
-    playerMove !== "paper" &&
-    playerMove !== "scissors"
-  ) {
-    playerMove = prompt(
-      "Invalid move! Please enter Rock, Paper, or Scissors"
-    ).toLowerCase();
-  }
-
-  return playerMove;
-}
-
-function playRound(playerSelection, computerSelection) {
-  if (playerSelection === computerSelection) {
-    return "Its a tie!";
+function jankenponRound(playerSelection, computerSelection) {
+  const playerSelectionLowerCase = playerSelection.toLowerCase();
+  const computerSelectionLowerCase = computerSelection.toLowerCase();
+  if (playerSelectionLowerCase === computerSelectionLowerCase) {
+    return console.log("tie!!");
   } else if (
-    (playerSelection === "rock" && computerSelection === "scissors") ||
-    (playerSelection === "paper" && computerSelection === "rock") ||
-    (playerSelection === "scissors" && computerSelection === "paper")
+    playerSelectionLowerCase === "rock" &&
+    computerSelectionLowerCase == "paper"
   ) {
-    return "You win this round!";
-  } else {
-    return "The computer wins this round!";
-  }
-//   playRound() no puede acceder directamente a playerSelection y 
-//   computerSelection definidos dentro de la función game().
-//   Sin embargo, cuando playRound() es llamado dentro de game(), 
-//   se le pasan dos argumentos: playerSelection y computerSelection. 
-//   Estos argumentos son valores que se obtienen al llamar a las funciones
-//   getPlayerChoice() y getComputerChoice() dentro de game().
-//   Esos valores son pasados como argumentos a playRound() en 
-//   cada iteración del bucle while dentro de game(). Por lo tanto, 
-//   aunque playRound() no puede acceder directamente a las variables 
-//   definidas en game(), puede usar los valores que se le pasan como argumentos.
-}
+    return console.log("computer wins");
+  } else if (
+    playerSelectionLowerCase === "paper" &&
+    computerSelectionLowerCase == "rock"
+  ) {
+    return console.log("player wins");
+} else if (
+  playerSelectionLowerCase === "rock" &&
+  computerSelectionLowerCase == "scissors"
+) {
+  return console.log("player wins");
+} else if (
+  playerSelectionLowerCase === "scissors" &&
+  computerSelectionLowerCase == "rock"
+) {
+  return console.log("computer wins");
+} else if (
+  playerSelectionLowerCase === "scissors" &&
+  computerSelectionLowerCase == "paper"
+) {
+  return console.log("player wins");
+} else if (
+  playerSelectionLowerCase === "paper" &&
+  computerSelectionLowerCase == "scissors"
+) {
+  return console.log("computer wins");
+}}
 
-function game() {
-  let round = 0;
+const playerSelection = 'ROCK'
+const computerSelection= getComputerChoice();
 
-  while (round < 5) {
-    const playerSelection = getPlayerChoice();
-    const computerSelection = getComputerChoice();
-    const result = playRound(playerSelection, computerSelection);
-
-    console.log(result);
-    round++;
-  }
-}
-
-game();
+console.log(jankenponRound(playerSelection,computerSelection));
